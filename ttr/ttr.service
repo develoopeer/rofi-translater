@@ -1,0 +1,13 @@
+[Unit]
+Description=Tray Translater App service
+
+[Service]
+Type=simple
+PIDFile=/var/run/user/$UID
+WorkingDirectory=/var/run/user/$UID
+ExecStart=/usr/bin/python3 -m ttr.main
+TimeoutSec=300
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

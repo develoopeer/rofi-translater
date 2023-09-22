@@ -1,0 +1,4 @@
+include *.png
+include *.wav
+include *.service
+include *.sh
