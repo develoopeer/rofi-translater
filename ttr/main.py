@@ -23,7 +23,7 @@ def current_folder():
 def on_activate():
     word = str(pyclip.paste(text=True))
     webbrowser.open("https://dictionary.cambridge.org/dictionary/english/{0}".format(
-        word)
+        word.lower())
     )
     logger.debug('{0} was googled'.format(word))
 
@@ -31,19 +31,16 @@ def open_translater():
     word = str(pyclip.paste(text=True))
     gtr_link = "https://translate.google.com/?hl=ru&sl=auto&tl=ru&text={0}&op=translate"
     webbrowser.open(gtr_link.format(
-        word.replace(" " , "%20"))
+        word.replace(" " , "%20").lower())
     )
     logger.debug('{0} was googled'.format(word))
 
 def run_listener():
     print('| ----------------Listener invoked---------------- |')
-    def for_canonical(wrapper):
-        return lambda k: wrapper(listener.canonical(k))
-    hotkey = keyboard.HotKey(keyboard.HotKey.parse(DICTIONARY_SHORTCUT), on_activate)
-    hotkey = keyboard.HotKey(keyboard.HotKey.parse(GOOGLE_TRANSLATE_SHORTCUT), open_translater)
-    with keyboard.Listener(
-        on_press=for_canonical(hotkey.press),
-        on_release=for_canonical(hotkey.release)) as listener:
+    with keyboard.GlobalHotKeys({
+        GOOGLE_TRANSLATE_SHORTCUT: open_translater,
+        DICTIONARY_SHORTCUT: on_activate
+    }) as listener:
         listener.join()
 
 def on_clicked(icon):
