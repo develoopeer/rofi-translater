@@ -5,8 +5,11 @@ import webbrowser
 from threading import Thread
 
 from ttr.configs import LOGGER_FILE , DICTIONARY_SHORTCUT , GOOGLE_TRANSLATE_SHORTCUT
+from ttr.configs import first_try , add_word_to_db
+from ttr.parser import parse_cam_dictionary, parse_translater
 
 import pyclip
+
 from notifypy import Notify
 from pystray import Icon , Menu as menu, MenuItem as item
 from loguru import logger
@@ -26,6 +29,8 @@ def on_activate():
         word.lower())
     )
     logger.debug('{0} was googled'.format(word))
+    print((word , parse_cam_dictionary , parse_translater))
+    add_word_to_db((word , parse_cam_dictionary(word) , parse_translater(word)))
 
 def open_translater():
     word = str(pyclip.paste(text=True))
@@ -34,6 +39,7 @@ def open_translater():
         word.replace(" " , "%20").lower())
     )
     logger.debug('{0} was googled'.format(word))
+    add_word_to_db((word , parse_cam_dictionary(word) , parse_translater(word)))
 
 def run_listener():
     print('| ----------------Listener invoked---------------- |')
@@ -52,13 +58,17 @@ def on_clicked(icon):
     icon.stop()
     notification.send(block=False)
 
+def import_stats():
+    pass
+
 def run_icon(icon):
     icon.run()
 
 
 def main():
+    first_try()
     icon = Icon('TTR' , Image.open(os.path.join(current_folder() , 'icon.png')))
-    current_menu = menu(item('Exit' , lambda: on_clicked(icon)))
+    current_menu = menu(item('Import stats' , lambda: import_stats()) , menu.SEPARATOR , item('Exit' , lambda: on_clicked(icon)))
     icon.menu = current_menu
     icon_listen = Thread(target = run_listener , daemon=True)
 
