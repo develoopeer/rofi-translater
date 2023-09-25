@@ -3,11 +3,11 @@
 import os
 import json
 
-LOGGER_FILE = "logs.log"
 DICTIONARY_SHORTCUT = "<ctrl>+<alt>+h"
 GOOGLE_TRANSLATE_SHORTCUT="<ctrl>+<alt>+]"
 HOME_FOLDER=os.path.expanduser('~')
 JSON_FILENAME=os.path.join(HOME_FOLDER , "ttr.json")
+LOGGER_FILE = os.path.join(HOME_FOLDER , "logs.log")
 
 def first_try():
     if not os.path.exists(HOME_FOLDER):
@@ -15,7 +15,7 @@ def first_try():
     if not os.path.exists(JSON_FILENAME):
         os.mknod(JSON_FILENAME)
         with open(JSON_FILENAME , 'w' , encoding='utf-8') as file:
-            json.dump({"words": []} , file)
+            json.dump({"words": []} , file , indent=4)
 
 def get_json():
     with open(JSON_FILENAME , 'r') as file:
@@ -31,5 +31,5 @@ def add_word_to_db(word):
         "trans": word[2]
     })
     with open(JSON_FILENAME , 'w' , encoding='utf-8') as file:
-        json.dump(cur_json , file , ensure_ascii=False)
+        json.dump(cur_json , file , ensure_ascii=False , indent=4)
         # ensure_ascii is necessary for utf-8 symbols
