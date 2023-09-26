@@ -1,11 +1,12 @@
 """Main file for running app
 """
 import os
+import sys
 import webbrowser
 from threading import Thread
 
-from ttr.configs import LOGGER_FILE , DICTIONARY_SHORTCUT , GOOGLE_TRANSLATE_SHORTCUT
-from ttr.configs import first_try , add_word_to_db
+from ttr.configs import LOGGER_FILE , DICTIONARY_SHORTCUT , GOOGLE_TRANSLATE_SHORTCUT , JSON_FILENAME , AnotherInstanceIsRunning
+from ttr.configs import first_try , add_word_to_db , is_running , dump_pid , clean_pid
 from ttr.parser import parse_cam_dictionary, parse_translater
 
 import pyclip
@@ -29,7 +30,6 @@ def on_activate():
         word.lower())
     )
     logger.debug('{0} was googled'.format(word))
-    print((word , parse_cam_dictionary , parse_translater))
     add_word_to_db((word , parse_cam_dictionary(word) , parse_translater(word)))
 
 def open_translater():
@@ -56,23 +56,28 @@ def on_clicked(icon):
     notification.audio = os.path.join(current_folder( ), 'notify.wav')
     notification.message = "The app has been closed"
     icon.stop()
+    clean_pid()
     notification.send(block=False)
 
-def import_stats():
-    pass
+def show_words():
+    os.system('gedit {0}'.format(JSON_FILENAME))
 
 def run_icon(icon):
-    icon.run()
+    if is_running():
+        raise AnotherInstanceIsRunning
+    else:
+        dump_pid(os.getpid())
+        icon.run()
 
 
 def main():
     first_try()
     icon = Icon('TTR' , Image.open(os.path.join(current_folder() , 'icon.png')))
-    current_menu = menu(item('Import stats' , lambda: import_stats()) , menu.SEPARATOR , item('Exit' , lambda: on_clicked(icon)))
+    current_menu = menu(item('Show words' , lambda: show_words()) , menu.SEPARATOR , item('Exit' , lambda: on_clicked(icon)))
     icon.menu = current_menu
     icon_listen = Thread(target = run_listener , daemon=True)
 
-    icon_listen.start()
     run_icon(icon)
+    icon_listen.start()
 
 main()

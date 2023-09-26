@@ -18,7 +18,7 @@ class PostInstallCommand(install):
 
 setup(
     name="ttr",
-    version="0.0.1",
+    version="0.1.0",
     packages=["ttr"],
     package_data={
         "ttr": ["*.wav" , "*.png" , "*.service" , "*.sh"]
