@@ -6,4 +6,4 @@ Tray Tranlater App
   <img alt="for light theme" src="imoge.png">
 </picture>
 
-![example](example.png "Example")
+![example](docs/example.png "Example")
