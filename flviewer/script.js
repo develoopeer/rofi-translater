@@ -8,6 +8,7 @@ let max_value = document.getElementById("max-value")
 let somedata
 
 window.onload = async function(){
+    curr_word.value = 1;
     fetch('dump.json').then( response => response.json()).then(function(result){
         somedata = result  
     }).then(function(){
@@ -27,20 +28,34 @@ function change_word_to_index(words , index){
 
 window.onkeydown = function(key){
     if (key.code == 'ArrowRight'){
-        let cv = parseInt(curr_word.innerHTML);
+        let cv = parseInt(curr_word.value);
         let mv = parseInt(max_value.innerHTML);
         if (cv + 1 <= mv){
             current_index+= 1
-            curr_word.innerHTML = current_index + 1;
+            curr_word.value = current_index + 1;
             change_word_to_index(somedata , current_index)
-        } 
+        }else{
+            current_index = 0
+            curr_word.value = current_index + 1;
+            change_word_to_index(somedata , current_index)
+        }
     }
     if (key.code == 'ArrowLeft'){
-        let cv = parseInt(curr_word.innerHTML);
+        let cv = parseInt(curr_word.value);
+        let mv = parseInt(max_value.innerHTML);
         if (cv -1 > 0){
-            curr_word.innerHTML = current_index;
+            curr_word.value = current_index;
             current_index-= 1
             change_word_to_index(somedata , current_index)
-        } 
+        }else{
+            current_index = mv - 1
+            curr_word.value = current_index + 1;
+            change_word_to_index(somedata , current_index)
+        }
     }
+}
+
+document.getElementById('current-value').onchange = function(){
+    current_index = document.getElementById('current-value').value
+    change_word_to_index(somedata , current_index - 1)
 }
