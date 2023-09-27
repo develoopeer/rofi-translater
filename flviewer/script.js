@@ -57,5 +57,9 @@ window.onkeydown = function(key){
 
 document.getElementById('current-value').onchange = function(){
     current_index = document.getElementById('current-value').value
+    if (current_index > parseInt(max_value.innerHTML)){
+        current_index = parseInt(max_value.innerHTML)
+        curr_word.value = current_index;
+    }
     change_word_to_index(somedata , current_index - 1)
 }
