@@ -15,8 +15,9 @@ body{
 }
 
 .main-card-wrapper{
-    font-family: 'Open Sans', sans-serif;    width: 50vw;
-    height: 50vh;
+    font-family: 'Open Sans', sans-serif;    
+    width: 40vw;
+    height: 40vh;
     margin: auto;
     background-color: #1C2128;
     padding: 16px 24px;
@@ -63,7 +64,7 @@ body{
 }
 .main-word{
     text-align: center;
-    font-size: 50pt;
+    font-size: 40pt;
 }
 
 .main-word::selection , .trans-word::selection{
@@ -74,7 +75,7 @@ body{
 
 .trans-word{
     margin-top: 10%;
-    font-size: 30pt;
+    font-size: 20pt;
     text-align: center;
     min-height: 0; /* new */
     text-overflow: ellipsis;
