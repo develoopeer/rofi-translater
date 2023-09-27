@@ -19,7 +19,9 @@
                 <div class="trans-word" id="trans-word"></div>
             </div>
         </div>
-        <div class="counter"><input id="current-value"></input>/<span id="max-value">0</span></div>
+        <div class="counter">
+            <input maxlength= "3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" id="current-value"></input>/<span id="max-value">0</span>
+        </div>
     </div>
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script src="script.js"></script>
