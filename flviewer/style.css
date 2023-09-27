@@ -65,6 +65,13 @@ body{
     text-align: center;
     font-size: 50pt;
 }
+
+.main-word::selection , .trans-word::selection{
+    transition: 0.5s;
+    /* background: #5991eb; */
+    text-decoration: underline 3px;
+}
+
 .trans-word{
     margin-top: 10%;
     font-size: 30pt;
