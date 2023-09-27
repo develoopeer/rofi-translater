@@ -6,22 +6,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/dark-mode-toggle"></script>
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    <div class="toggler">
     </div>
     <div class="main-card-wrapper">
-        <div class="date">26.09.2023</div>
+        <div class="date" id="date">26.09.2023</div>
         <div class="main-card">
             <div class="main-card-inside-wrapper">
-                <div class="main-word">Motherfucker</div>
-                <div class="trans-word">Мазафакер</div>
+                <div class="main-word" id="main-word"></div>
+                <div class="trans-word" id="trans-word"></div>
             </div>
         </div>
-        <div class="counter">1/25</div>
+        <div class="counter"><span id="current-value">0</span>/<span id="max-value">0</span></div>
     </div>
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

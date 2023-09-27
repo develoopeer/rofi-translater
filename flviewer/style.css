@@ -9,6 +9,7 @@ body{
     width: 100vw;
     height: 100vh;
     display: flex;
+    /* background-color: #22272E; */
 }
 
 .main-card-wrapper{
