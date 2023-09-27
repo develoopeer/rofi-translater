@@ -5,5 +5,3 @@ Tray Tranlater App
   <source media="(prefers-color-scheme: light)" srcset="docs/imoge.png">
   <img alt="for light theme" src="imoge.png">
 </picture>
-
-![example](docs/example.png "Example")
