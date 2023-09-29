@@ -102,7 +102,7 @@ body{
     text-align: center;
 }
 
-input{
+.main-card-wrapper input{
     margin-top: 2%;
     color: #98B6B0;
     font-family: 'JetBrains Mono', monospace;
@@ -115,8 +115,29 @@ input{
     caret-shape: underscore;
 }
 
-input:focus{
+.main-card-wrapper input:focus{
     outline: none;
     border: none;
     caret-shape: underscore;
+}
+
+.main-card-wrapper input::selection{
+    background: #98B6B0;
+}
+
+#play{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    margin: auto;
+}
+
+.upper-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+
+.play-button{
+    display: flex;
 }

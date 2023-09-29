@@ -63,3 +63,19 @@ document.getElementById('current-value').onchange = function(){
     }
     change_word_to_index(somedata , current_index - 1)
 }
+
+window.onkeydown = function(key){
+    if (key.keyCode === 114 || (key.ctrlKey && key.keyCode === 70)) { 
+        key.preventDefault();
+    }
+}
+
+document.getElementById('play').onclick = function(){
+    let audio = document.getElementById('media');
+    // audio.play()
+    if (audio.paused){
+        audio.play();
+    }else{
+        audio.pause();
+    }
+}
