@@ -4,6 +4,7 @@ let curr_word = document.getElementById('current-value')
 let trans_word = document.getElementById("trans-word")
 let date = document.getElementById("date")
 let max_value = document.getElementById("max-value")
+let audio = document.getElementById('media');
 
 let somedata
 
@@ -13,6 +14,7 @@ window.onload = async function(){
         somedata = result  
     }).then(function(){
         change_word_to_index(somedata , 0);
+        audio.src = 'data:audio/wav;base64,' + Object.values(somedata)[0][0]
         date.innerHTML = new Date().toLocaleDateString("en-GB").replaceAll("/" , '.')
         curr_word.innerHTML = current_index + 1;
         max_value.innerHTML = Object.keys(somedata).length;
@@ -22,7 +24,7 @@ window.onload = async function(){
 
 function change_word_to_index(words , index){
     main_word.innerHTML = Object.keys(words)[index]
-    trans_word.innerHTML = Object.values(words)[index]
+    trans_word.innerHTML = Object.values(words)[index][1]
 }
 
 
@@ -34,10 +36,12 @@ window.onkeydown = function(key){
             current_index+= 1
             curr_word.value = current_index + 1;
             change_word_to_index(somedata , current_index)
+            audio.src = 'data:audio/wav;base64,' + Object.values(somedata)[current_index][0]
         }else{
             current_index = 0
             curr_word.value = current_index + 1;
             change_word_to_index(somedata , current_index)
+            audio.src = 'data:audio/wav;base64,' + Object.values(somedata)[current_index][0]
         }
     }
     if (key.code == 'ArrowLeft'){
@@ -47,10 +51,12 @@ window.onkeydown = function(key){
             curr_word.value = current_index;
             current_index-= 1
             change_word_to_index(somedata , current_index)
+            audio.src = 'data:audio/wav;base64,' + Object.values(somedata)[current_index][0]
         }else{
             current_index = mv - 1
             curr_word.value = current_index + 1;
             change_word_to_index(somedata , current_index)
+            audio.src = 'data:audio/wav;base64,' + Object.values(somedata)[current_index+1][0]
         }
     }
 }
@@ -62,17 +68,12 @@ document.getElementById('current-value').onchange = function(){
         curr_word.value = current_index;
     }
     change_word_to_index(somedata , current_index - 1)
-}
-
-window.onkeydown = function(key){
-    if (key.keyCode === 114 || (key.ctrlKey && key.keyCode === 70)) { 
-        key.preventDefault();
-    }
+    audio.src = 'data:audio/wav;base64,' + Object.values(somedata)[current_index-1][0]
 }
 
 document.getElementById('play').onclick = function(){
-    let audio = document.getElementById('media');
     // audio.play()
+    // 'data:audio/wav;base64,'
     if (audio.paused){
         audio.play();
     }else{
