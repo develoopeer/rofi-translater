@@ -10,7 +10,7 @@ let somedata
 
 window.onload = async function(){
     curr_word.value = 1;
-    fetch('dump.json').then( response => response.json()).then(function(result){
+    fetch('another.json').then( response => response.json()).then(function(result){
         somedata = result  
     }).then(function(){
         change_word_to_index(somedata , 0);

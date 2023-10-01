@@ -80,4 +80,4 @@ def main():
     run_icon(icon)
     icon_listen.start()
 
-# main()
+main()

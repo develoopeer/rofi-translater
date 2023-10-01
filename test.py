@@ -34,12 +34,12 @@ def parse_apkg(apkg_file):
 			]
 		current_data = []
 		current_file = base64.b64encode(archive.read(value))
-		print(type(current_file))
 		current_data.append(current_file.decode())
-		current_data.append(cleanhtml(elem[0].split('\x1f')[4].split('&nbsp;')[0]))
+		print(elem[0].split('\x1f'))
+		current_data.append(cleanhtml(elem[0].split('\x1f')[5].split('&nbsp;')[0]))
 		dump_data[elem[0].split('\x1f')[0]] = current_data
 
-	with open('dump.json' , 'w') as file:
+	with open('another.json' , 'w') as file:
 		json.dump(dump_data , file , indent=4)
 	os.remove('collection.anki2')
 
@@ -51,4 +51,4 @@ def read_media():
 	print(b)
 
 
-parse_apkg('Cambridge_Vocabulary_for_IELTS_Advanced.apkg')
+parse_apkg('another.apkg')

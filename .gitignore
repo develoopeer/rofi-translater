@@ -4,5 +4,5 @@ dist/
 *.log
 __pycache__/
 *.anki2
-*/.json
+*.json
 *.apkg
