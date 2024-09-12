@@ -13,8 +13,9 @@ build() {
 }
 
 package(){
-	echo $pkgdir
+	mkdir -p ~/.config/ttr/
 	cd $BUILDDIR/go/
 	install -Dm755 ttr "$pkgdir"/usr/bin/ttr-cli
-	# cp ttr $pkgdir
+	cd $BUILDDIR/
+	cp launch.sh $pkgdir/
 }
