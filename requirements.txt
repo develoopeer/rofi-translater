@@ -1,8 +1,0 @@
-pystray
-pyclip
-pynput
-loguru
-notify-py
-bs4
-requests
-typer
