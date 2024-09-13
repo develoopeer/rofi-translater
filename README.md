@@ -4,6 +4,10 @@
 
 ![Preview](docs/preview.gif)
 
+## Requirements
+- rofi
+- dmenu
+
 ## Installation
 
 ### Manually
