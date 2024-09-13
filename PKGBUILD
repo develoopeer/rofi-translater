@@ -18,4 +18,7 @@ package(){
 	install -Dm755 ttr "$pkgdir"/usr/bin/ttr-cli
 	cd $BUILDDIR/
 	cp launch.sh $pkgdir/
+	cp -r assets/ $pkgdir/
+	cp $pkgdir/launch.sh ~/.config/ttr/
+	cp -r $pkgdir/assets/ ~/.config/ttr/
 }
