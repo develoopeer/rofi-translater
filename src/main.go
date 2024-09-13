@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/spf13/cobra"
 )
 
 type ParsedResponse struct {
@@ -25,7 +26,7 @@ func parseCam(word string) {
 		log.Fatal(err)
 	}
 
-	prompt_string := fmt.Sprintf("\000prompt\x1f%s\n", os.Args[1])
+	prompt_string := fmt.Sprintf("\000prompt\x1f%s\n", word)
 	var count int
 	fmt.Print(prompt_string)
 	for i, value := range doc.Find(".def.ddef_d.db").EachIter() {
@@ -46,7 +47,30 @@ func parseCam(word string) {
 }
 
 func main() {
-	if len(os.Args) != 1 {
-		parseCam(os.Args[1])
+	var rootCmd = &cobra.Command{
+		Use:   "arno",
+		Short: "Root arno command",
+		Long:  `Really long string`,
+
+		Run: func(cmd *cobra.Command, args []string) {
+			fmt.Println("No action provided. Please run cli with --help flag.")
+		},
+	}
+	var translateCmd = &cobra.Command{
+		Use:   "translate",
+		Short: "Translate word or sentence",
+		Long:  `Really long string`,
+
+		Run: func(cmd *cobra.Command, args []string) {
+			if len(args) > 0 {
+				parseCam(args[0])
+			}
+		},
+	}
+	rootCmd.AddCommand(translateCmd)
+	rootCmd.CompletionOptions.HiddenDefaultCmd = true
+	if err := rootCmd.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
 }

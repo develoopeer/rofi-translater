@@ -1,21 +1,21 @@
 # Maintainer: Develoopeer https://github.com/develoopeer/
-pkgname=TrayTranslater
-pkgver=0.0.1
+pkgname=rofi-translater
+pkgver=0.1.0
 pkgrel=1
 pkgdesc=""
-arch=("x86_64")
-url="https://github.com/develoopeer/tray-translater/"
+arch=("any")
+url="https://github.com/develoopeer/rofi-translater/"
 license=('GPL')
 
 build() {
-	cd $BUILDDIR/go/
+	cd $BUILDDIR/src/
 	go build -o ttr
 }
 
 package(){
 	mkdir -p ~/.config/ttr/
-	cd $BUILDDIR/go/
-	install -Dm755 ttr "$pkgdir"/usr/bin/ttr-cli
+	cd $BUILDDIR/src/
+	install -Dm755 ttr "$pkgdir"/usr/bin/ttr
 	cd $BUILDDIR/
 	cp launch.sh $pkgdir/
 	cp -r assets/ $pkgdir/
