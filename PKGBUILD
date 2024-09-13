@@ -9,7 +9,7 @@ license=('GPL')
 
 build() {
 	cd $BUILDDIR/src/
-	go build -o ttr
+	go build
 }
 
 package(){

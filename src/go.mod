@@ -1,4 +1,4 @@
-module main
+module ttr
 
 go 1.23.1
 

@@ -5,7 +5,7 @@
 ![Preview](docs/preview.gif)
 
 ## Requirements
-- rofi
+- [rofi](https://github.com/davatorium/rofi)
 - dmenu
 
 ## Installation
@@ -13,10 +13,9 @@
 ### Manually
 1) Build and install golang binary with
 ```bash
-go build . -o ttr-cli
 go install
 ```
-2) Create ~/.config/ttr/ folder and copy launch script to it
+2) Create `~/.config/ttr/` folder and copy launch script to it
 ```bash
 mkdir -p ~/.config/ttr/
 cp launch.sh ~/.config/ttr/
@@ -31,10 +30,6 @@ super + t
 Arch
 ```bash
 yay -S rofi-translater
-```
-Ubuntu
-```bash
-sudo apt-get install rofi-translater
 ```
 
 ## Configuration

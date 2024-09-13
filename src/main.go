@@ -48,9 +48,9 @@ func parseCam(word string) {
 
 func main() {
 	var rootCmd = &cobra.Command{
-		Use:   "arno",
-		Short: "Root arno command",
-		Long:  `Really long string`,
+		Use:   "ttr",
+		Short: "Rofi translate cli app",
+		Long:  `Entry point for rofi-translate app`,
 
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Println("No action provided. Please run cli with --help flag.")
