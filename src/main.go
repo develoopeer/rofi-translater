@@ -39,7 +39,7 @@ func parseCam(word string) {
 			output += substring + " "
 		}
 		fmt.Println(upperFirstLetter(output))
-		count = i
+		count = i + 1 // i starts with 0
 	}
 	if count == 0 {
 		fmt.Println("No output")
