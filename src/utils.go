@@ -44,13 +44,7 @@ func upperFirstLetter(s string) string {
 	return strings.ToUpper(s[:1]) + strings.ToLower(s[1:])
 }
 
-func printForRofi(
-	word string,
-	translateOrder int,
-	libreTranslate bool,
-	libreTranslateTarget string,
-	camTranslateDict string,
-) {
+func printForRofi(word string, translateOrder int, libreTranslate bool, libreTranslateTarget string, camTranslateDict string) {
 	var libreResult []string
 	var mergedResult []string
 	if libreTranslate == false {
