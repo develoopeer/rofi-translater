@@ -2,9 +2,11 @@ package main
 
 import (
 	"bytes"
+	"encoding/csv"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 )
 
@@ -47,13 +49,17 @@ func upperFirstLetter(s string) string {
 func printForRofi(word string, translateOrder int, libreTranslate bool, libreTranslateTarget string, camTranslateDict string) {
 	var libreResult []string
 	var mergedResult []string
+	var splitResult []string
+
 	if libreTranslate == false {
 		libreResult = []string{}
 	} else {
 		libreResult = parseLibreTranslate(word, libreTranslateTarget)
 	}
 	cambrResult := parseCam(word, camTranslateDict)
-	splitResult := []string{strings.Repeat("-", 100)}
+	if len(cambrResult) != 0 {
+		splitResult = []string{strings.Repeat(" ", 50)}
+	}
 	if translateOrder == 1 {
 		mergedResult = append(cambrResult, splitResult...)
 		mergedResult = append(mergedResult, libreResult...)
@@ -69,8 +75,21 @@ func printForRofi(word string, translateOrder int, libreTranslate bool, libreTra
 		fmt.Println(line)
 		count = i + 1
 	}
+	fmt.Println(fmt.Sprintf("\000data\x1f%s\n", word))
 	if count == 0 {
 		fmt.Println("No output")
 	}
 
+}
+
+func appendToCsv(filename string, word []string) {
+	file, err := os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	defer file.Close()
+
+	writer := csv.NewWriter(file)
+	defer writer.Flush()
+	err = writer.Write(word)
+	if err != nil {
+		panic(err)
+	}
 }
